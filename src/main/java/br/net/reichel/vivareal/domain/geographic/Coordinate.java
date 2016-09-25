@@ -1,17 +1,16 @@
-package br.net.reichel.vivareal.domain;
+package br.net.reichel.vivareal.domain.geographic;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * Tiny Type para coordenadas
  * Created by Christian Reichel on 9/25/2016.
  */
-class Coordinate {
+public class Coordinate {
 
     private Integer latitude;
     private Integer longitude;
 
-    Coordinate(Integer latitude, Integer longitude) {
+    public Coordinate(Integer latitude, Integer longitude) {
         checkArgument(latitude != null && latitude >= 0, "invalid latitude %s", latitude);
         checkArgument(longitude != null && longitude >= 0, "invalid longitude %s", longitude);
         this.latitude = latitude;
@@ -26,11 +25,11 @@ class Coordinate {
         return longitude;
     }
 
-    Integer getY() {
+    public Integer getY() {
         return latitude;
     }
 
-    Integer getX() {
+    public Integer getX() {
         return longitude;
     }
 

@@ -1,8 +1,12 @@
-package br.net.reichel.vivareal.domain;
+package br.net.reichel.vivareal.domain.estate;
 
+import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
+import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
+import br.net.reichel.vivareal.domain.location.Province;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Christian Reichel on 9/25/2016.
@@ -23,7 +27,7 @@ public class PropertyTest {
         //Given
         final Property property = new Property();
         //When
-        property.addProvince(new Province("teste", new BoundaryUpperLeft(1,2) , new BoundaryBottonRight(3,4)));
+        property.addProvince(new Province("teste", new BoundaryUpperLeft(1, 2), new BoundaryBottomRight(3, 4)));
         //Then
         assertEquals(1, property.getProvinces().size());
     }

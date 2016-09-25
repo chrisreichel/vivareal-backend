@@ -1,4 +1,6 @@
-package br.net.reichel.vivareal.domain;
+package br.net.reichel.vivareal.domain.estate;
+
+import br.net.reichel.vivareal.domain.location.Province;
 
 import java.util.Collections;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package br.net.reichel.vivareal.domain;
+package br.net.reichel.vivareal.domain.estate;
 
 /**
  * Created by Christian Reichel on 9/25/2016.

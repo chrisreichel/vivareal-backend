@@ -1,6 +1,6 @@
 package br.net.reichel.vivareal.web;
 
-import br.net.reichel.vivareal.domain.Property;
+import br.net.reichel.vivareal.domain.estate.Property;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

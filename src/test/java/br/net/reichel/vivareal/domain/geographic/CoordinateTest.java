@@ -1,4 +1,4 @@
-package br.net.reichel.vivareal.domain;
+package br.net.reichel.vivareal.domain.geographic;
 
 import org.junit.Test;
 
