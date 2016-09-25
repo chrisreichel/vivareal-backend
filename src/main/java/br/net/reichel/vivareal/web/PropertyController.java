@@ -16,7 +16,7 @@ import java.util.Collections;
  */
 @RestController
 @RequestMapping(value = "/{properties}")
-public class PropertiesController {
+public class PropertyController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Property create(@Valid Property property) {
