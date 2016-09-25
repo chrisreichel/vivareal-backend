@@ -1,0 +1,14 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.beans" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.core.env" level="WARN"/>
+
+    <root level="INFO">
+        <!-- CONSOLE vem do xml do import -->
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
