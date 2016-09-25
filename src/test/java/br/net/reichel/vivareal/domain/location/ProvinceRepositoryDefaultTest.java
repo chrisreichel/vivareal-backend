@@ -20,7 +20,6 @@ public class ProvinceRepositoryDefaultTest {
         final Set<Province> allProvinces = provinceRepository.getAll();
         //Then
         assertTrue(6 == allProvinces.size());
-        System.out.printf("Provinces: " + allProvinces.toString());
     }
 
 }

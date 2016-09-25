@@ -31,7 +31,6 @@ public class Coordinate {
     }
 
     public Coordinate(Integer latitude, Integer longitude) {
-        System.out.println("Veio latitude(y): " + latitude + " e longitude(x): " + longitude);
         setLatitude(latitude);
         setLongitude(longitude);
     }

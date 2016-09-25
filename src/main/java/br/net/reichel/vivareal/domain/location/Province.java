@@ -24,7 +24,7 @@ public class Province {
 
         // Dado que as "províncias" são retangulares
         boundaryUpperRight = new Coordinate(boundaryUpperLeft.getLatitude(), boundaryBottomRight.getLongitude());
-        boundaryBottomLeft = new Coordinate(boundaryBottomRight.getLongitude(), boundaryUpperLeft.getLongitude());
+        boundaryBottomLeft = new Coordinate(boundaryBottomRight.getLatitude(), boundaryUpperLeft.getLongitude());
     }
 
     public String getName() {
