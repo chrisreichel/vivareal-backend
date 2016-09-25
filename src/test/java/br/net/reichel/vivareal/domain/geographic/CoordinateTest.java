@@ -16,4 +16,9 @@ public class CoordinateTest {
     public void shouldNotBeNegative() throws Exception {
         new Coordinate(-1, 1);
     }
+
+    @Test
+    public void shouldBeValidWithMaximumValues() throws Exception {
+        new Coordinate(1000, 1400);
+    }
 }

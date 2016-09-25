@@ -6,6 +6,10 @@ package br.net.reichel.vivareal.domain.geographic;
  */
 public class BoundaryUpperLeft extends Coordinate {
 
+    public BoundaryUpperLeft(Coordinate coordinate) {
+        super(coordinate);
+    }
+
     public BoundaryUpperLeft(Integer latitude, Integer longitude) {
         super(latitude, longitude);
     }

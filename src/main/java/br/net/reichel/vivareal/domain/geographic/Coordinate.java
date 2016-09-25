@@ -1,5 +1,7 @@
 package br.net.reichel.vivareal.domain.geographic;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
@@ -14,26 +16,44 @@ public class Coordinate {
     public static final Integer LATITUDE_MIN = 0;
     public static final Integer LONGITUDE_MIN = 0;
 
-    private final Integer latitude;
-    private final Integer longitude;
+    private Integer latitude;
+    private Integer longitude;
+
+    public Coordinate() {
+    }
 
     public Coordinate(String x, String y) {
         this(Integer.valueOf(y), Integer.valueOf(x));
     }
 
+    public Coordinate(Coordinate reference) {
+        this(reference.getLatitude(), reference.getLongitude());
+    }
+
     public Coordinate(Integer latitude, Integer longitude) {
-        checkArgument(latitude != null && latitude >= LATITUDE_MIN && latitude <= LATITUDE_MAX, "invalid latitude %s", latitude);
-        checkArgument(longitude != null && longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX, "invalid longitude %s", longitude);
-        this.latitude = latitude;
-        this.longitude = longitude;
+        System.out.println("Veio latitude(y): " + latitude + " e longitude(x): " + longitude);
+        setLatitude(latitude);
+        setLongitude(longitude);
     }
 
     public Integer getLatitude() {
         return latitude;
     }
 
+    @JsonSetter("y")
+    public void setLatitude(Integer latitude) {
+        checkArgument(latitude != null && latitude >= LATITUDE_MIN && latitude <= LATITUDE_MAX, "invalid latitude %s", latitude);
+        this.latitude = latitude;
+    }
+
     public Integer getLongitude() {
         return longitude;
+    }
+
+    @JsonSetter("x")
+    public void setLongitude(Integer longitude) {
+        checkArgument(longitude != null && longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX, "invalid longitude %s", longitude);
+        this.longitude = longitude;
     }
 
     public Integer getY() {
