@@ -1,15 +1,12 @@
 package br.net.reichel.vivareal.web;
 
 import br.net.reichel.vivareal.domain.estate.Property;
+import br.net.reichel.vivareal.web.event.PropertyRequest;
+import com.google.common.collect.Lists;
 import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by creichel on 9/25/16.
@@ -19,18 +16,20 @@ import java.util.Collections;
 public class PropertyController {
 
     @RequestMapping(method = RequestMethod.POST)
-    public Property create(@Valid Property property) {
-        return new Property();
+    public Property create(@RequestBody PropertyRequest property) throws Exception {
+        return property.toProperty();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Property getProperty(@PathVariable Long id) {
-        return new Property();
+        final Property prop = new Property();
+        prop.setId(id);
+        return prop;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public Collection<Property> search(HttpRequest httpRequest) {
-        return Collections.emptyList();
+        return Lists.newArrayList(new Property());
     }
 
 }

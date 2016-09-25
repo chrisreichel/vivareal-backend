@@ -9,13 +9,12 @@ import br.net.reichel.vivareal.domain.geographic.Coordinate;
  */
 public class Province {
 
-    // (x, y) -> (longitude, latitude)
     private String name;
 
     private BoundaryUpperLeft boundaryUpperLeft;
     private BoundaryBottomRight boundaryBottomRight;
 
-    private Coordinate boundaryBottonLeft;
+    private Coordinate boundaryBottomLeft;
     private Coordinate boundaryUpperRight;
 
     public Province(String name, BoundaryUpperLeft upperLeft, BoundaryBottomRight bottomRight) {
@@ -25,47 +24,27 @@ public class Province {
 
         // Dado que as "províncias" são retangulares
         boundaryUpperRight = new Coordinate(boundaryUpperLeft.getLatitude(), boundaryBottomRight.getLongitude());
-        boundaryBottonLeft = new Coordinate(boundaryBottomRight.getLongitude(), boundaryUpperLeft.getLongitude());
+        boundaryBottomLeft = new Coordinate(boundaryBottomRight.getLongitude(), boundaryUpperLeft.getLongitude());
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BoundaryUpperLeft getBoundaryUpperLeft() {
         return boundaryUpperLeft;
-    }
-
-    public void setBoundaryUpperLeft(BoundaryUpperLeft boundaryUpperLeft) {
-        this.boundaryUpperLeft = boundaryUpperLeft;
     }
 
     public BoundaryBottomRight getBoundaryBottomRight() {
         return boundaryBottomRight;
     }
 
-    public void setBoundaryBottomRight(BoundaryBottomRight boundaryBottomRight) {
-        this.boundaryBottomRight = boundaryBottomRight;
-    }
-
-    public Coordinate getBoundaryBottonLeft() {
-        return boundaryBottonLeft;
-    }
-
-    public void setBoundaryBottonLeft(Coordinate boundaryBottonLeft) {
-        this.boundaryBottonLeft = boundaryBottonLeft;
+    public Coordinate getBoundaryBottomLeft() {
+        return boundaryBottomLeft;
     }
 
     public Coordinate getBoundaryUpperRight() {
         return boundaryUpperRight;
-    }
-
-    public void setBoundaryUpperRight(Coordinate boundaryUpperRight) {
-        this.boundaryUpperRight = boundaryUpperRight;
     }
 
     @Override
@@ -74,7 +53,7 @@ public class Province {
                 "name='" + name + '\'' +
                 ", boundaryUpperLeft=" + boundaryUpperLeft +
                 ", boundaryBottomRight=" + boundaryBottomRight +
-                ", boundaryBottonLeft=" + boundaryBottonLeft +
+                ", boundaryBottonLeft=" + boundaryBottomLeft +
                 ", boundaryUpperRight=" + boundaryUpperRight +
                 '}';
     }

@@ -1,6 +1,9 @@
 package br.net.reichel.vivareal.domain.estate;
 
+import br.net.reichel.vivareal.domain.geographic.Coordinate;
 import br.net.reichel.vivareal.domain.location.Province;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,8 +18,7 @@ public class Property {
     private String title;
     private Integer price;
     private String description;
-    private Integer latitude;
-    private Integer longitude;
+    private Coordinate location;
     private Integer beds;
     private Integer baths;
     private Integer squareMeters;
@@ -69,20 +71,12 @@ public class Property {
         this.description = description;
     }
 
-    public Integer getLatitude() {
-        return latitude;
+    public Coordinate getLocation() {
+        return location;
     }
 
-    public void setLatitude(Integer latitude) {
-        this.latitude = latitude;
-    }
-
-    public Integer getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Integer longitude) {
-        this.longitude = longitude;
+    public void setLocation(Coordinate location) {
+        this.location = location;
     }
 
     public Integer getBeds() {
@@ -107,5 +101,10 @@ public class Property {
 
     public void setSquareMeters(Integer squareMeters) {
         this.squareMeters = squareMeters;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }
