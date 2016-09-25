@@ -5,4 +5,6 @@ package br.net.reichel.vivareal.domain;
  */
 public class Property {
 
+    
+
 }
