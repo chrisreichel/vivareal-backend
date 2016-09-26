@@ -28,6 +28,13 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
 
     private Set<Province> db = new HashSet<>();
 
+    public ProvinceRepositoryDefault() {
+    }
+
+    public ProvinceRepositoryDefault(Set<Province> mockedData) {
+        db = mockedData;
+    }
+
     @PostConstruct
     public void loadData() throws Exception {
         //TODO: Parametrizar
