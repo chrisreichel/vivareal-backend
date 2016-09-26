@@ -62,11 +62,18 @@
 
     <dependencies>
 
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.jsi</groupId>-->
+            <!--<artifactId>jsi</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.vividsolutions/jts -->
         <dependency>
-            <groupId>net.sourceforge.jsi</groupId>
-            <artifactId>jsi</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <version>1.13</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -165,10 +172,7 @@
             <id>clojars.org</id>
             <url>http://clojars.org/repo</url>
         </repository>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
+
     </repositories>
 
 

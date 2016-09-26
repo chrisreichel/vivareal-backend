@@ -1,13 +1,13 @@
 package br.net.reichel.vivareal.domain.estate;
 
 import br.net.reichel.vivareal.domain.location.ProvinceRepositoryDefault;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.index.quadtree.Quadtree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +23,10 @@ public class PropertyRepositoryDefault implements PropertyRepository {
 
     @PostConstruct
     public void loadData() throws Exception {
-        URL url = this.getClass().getResource("properties.json");
-        final ObjectMapper mapper = new ObjectMapper();
+        //http://tsusiatsoftware.net/jts/javadoc/com/vividsolutions/jts/index/quadtree/Quadtree.html
+        final Quadtree quadtree = new Quadtree();
+        Envelope envelope = new Envelope();
+        quadtree.insert(envelope, null);
     }
 
     @Override
