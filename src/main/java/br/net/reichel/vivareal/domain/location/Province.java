@@ -27,19 +27,7 @@ public class Province {
         // Dado que as "províncias" são retangulares
         boundaryUpperRight = new Coordinate(boundaryBottomRight.getLatitude(), boundaryUpperLeft.getLongitude());
         boundaryBottomLeft = new Coordinate(boundaryUpperLeft.getLatitude(), boundaryBottomRight.getLongitude());
-        debug();
     }
-
-    private void debug() {
-        System.out.printf("(%s,%s) ---------------- (%s,%s)\n",
-                boundaryUpperLeft.getLatitude(), boundaryUpperLeft.getLongitude(), boundaryUpperRight.getLatitude(), boundaryUpperRight.getLongitude());
-        for (int i = 0; i < 3; i++) {
-            System.out.println("|                           |");
-        }
-        System.out.printf("(%s,%s) ---------------- (%s,%s)\n",
-                boundaryBottomLeft.getLatitude(), boundaryBottomLeft.getLongitude(), boundaryBottomRight.getLatitude(), boundaryBottomRight.getLongitude());
-    }
-
 
     public boolean contains(Coordinate location) {
         checkArgument(location != null, "invalid coordinate " + location);

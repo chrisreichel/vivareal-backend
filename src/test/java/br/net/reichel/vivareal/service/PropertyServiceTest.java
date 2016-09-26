@@ -91,14 +91,35 @@ public class PropertyServiceTest {
     }
 
     @Test
-    public void getById() throws Exception {
-        assertTrue(false);
+    public void shouldFindByIdAndComplementWithProvince() throws Exception {
+        //Given
+        final Property refProperty = buildProperty(6);
+        given(propertyRepository.findById(6)).willReturn(refProperty);
+        //When
+        final Property found = service.findById(6);
+        //Then
+        assertTrue(1 == found.getProvinces().size());
+        assertEquals("Scavy", found.getProvinces().iterator().next().getName());
     }
 
     @Test
-    public void queryByCriteria() throws Exception {
-        assertTrue(false);//TODO
+    public void shouldFindByAreaAndComplementWithProvince() throws Exception {
+        //Given
+        final Set<Property> mockedResponse = new HashSet<>();
+        mockedResponse.add(buildProperty(8));
+        given(propertyRepository.findByArea(any(), any())).willReturn(mockedResponse);
+        final BoundaryBottomRight boundaryBottomRight = new BoundaryBottomRight(1, 20);
+        final BoundaryUpperLeft boundaryUpperLeft = new BoundaryUpperLeft(20, 10);
+        //When
+        final Set<Property> found = service.findByArea(boundaryUpperLeft, boundaryBottomRight);
+        //Then
+        assertTrue(1 == found.size());
+        final Property propFound = found.iterator().next();
+        assertTrue(1 == propFound.getProvinces().size());
+        assertEquals("Scavy", propFound.getProvinces().iterator().next().getName());
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     Property buildProperty(Integer id) {
         final Property p = new Property();
