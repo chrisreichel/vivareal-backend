@@ -6,6 +6,8 @@ import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
 import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.location.Province;
 import br.net.reichel.vivareal.domain.location.ProvinceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Service
 public class PropertyService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PropertyService.class);
+
     private PropertyRepository propertyRepository;
     private ProvinceRepository provinceRepository;
 
     @Autowired
     public PropertyService(PropertyRepository propertyRepository, ProvinceRepository provinceRepository) {
+        LOG.debug("Using repositories: " + propertyRepository + " and " + provinceRepository);
         this.propertyRepository = propertyRepository;
         this.provinceRepository = provinceRepository;
     }

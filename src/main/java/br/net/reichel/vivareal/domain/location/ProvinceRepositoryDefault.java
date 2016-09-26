@@ -44,7 +44,9 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
                 final JsonNode bottomRightNode = rootNode.get(name).get("boundaries").get("bottomRight");
                 final Coordinate upperLeft = mapper.treeToValue(upperLeftNode, Coordinate.class);
                 final Coordinate bottomRight = mapper.treeToValue(bottomRightNode, Coordinate.class);
-                db.add(new Province(name, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight)));
+                final Province province = new Province(name, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight));
+                LOG.debug("Loading province: " + province);
+                db.add(province);
             } catch (Throwable e) {
                 LOG.error("error at province: " + name + " - " + e.getMessage());
             }

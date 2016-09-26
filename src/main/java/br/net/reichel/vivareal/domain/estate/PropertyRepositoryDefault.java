@@ -44,6 +44,7 @@ public class PropertyRepositoryDefault implements PropertyRepository {
             PersistedProperty persisted = null;
             try {
                 persisted = mapper.treeToValue(propNode, PersistedProperty.class);
+                LOG.debug("loading data " + persisted);
                 insert(persisted.toProperty());
             } catch (JsonProcessingException e) {
                 LOG.error("error loading properties data from ths json", e);
