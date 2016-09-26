@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,10 +35,8 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
 
     @PostConstruct
     public void loadData() throws Exception {
-        //TODO: Parametrizar
-        final byte[] jsonFile = Files.readAllBytes(Paths.get("/Users/creichel/Documents/Development/VivaReal/vivareal-backend/src/main/resources/provinces.json"));
         final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode rootNode = mapper.readTree(jsonFile);
+        final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream("/provinces.json"));
         rootNode.fieldNames().forEachRemaining(nodeName -> {
             final String name = nodeName;
             try {

@@ -21,7 +21,7 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Property getProperty(@PathVariable Long id) {
+    public Property getProperty(@PathVariable Integer id) {
         final Property prop = new Property();
         prop.setId(id);
         return prop;

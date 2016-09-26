@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class Property {
 
-    private Long id;
+    private Integer id;
     private String title;
     private Integer price;
     private String description;
@@ -39,11 +39,11 @@ public class Property {
         this.provinces.add(province);
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
