@@ -42,7 +42,20 @@ public class WebPropertyTest {
     @Test
     public void shouldBuildAWebPropertyFromProperty() throws Exception {
         //Given
+        final Property p = new Property();
+        p.setId(11);
+        p.setLocation(new Coordinate(1, 2));
+        p.setSquareMeters(100);
+        p.setBaths(2);
+        p.setBeds(3);
+        p.setDescription("Magical place @ Dublin");
+        p.setPrice(35000);
+        p.setTitle("89 Lower Baggot Street, Dublin 2");
+        p.addProvince(new Province("Testing", new BoundaryUpperLeft(1, 2), new BoundaryBottomRight(2, 1)));
         //When
+        final WebProperty actual = new WebProperty(p);
         //Then
+        assertTrue(p.getId() == actual.getId());
+        assertTrue(p.getProvinces().size() == actual.getProvinces().size());
     }
 }

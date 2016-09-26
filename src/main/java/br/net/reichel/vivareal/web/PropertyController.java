@@ -54,13 +54,13 @@ public class PropertyController {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    BoundaryUpperLeft getBoundaryUpperLeftFrom(HttpServletRequest httpRequest) {
+    private BoundaryUpperLeft getBoundaryUpperLeftFrom(HttpServletRequest httpRequest) {
         final BoundaryUpperLeft retVal = new BoundaryUpperLeft(httpRequest.getParameter("ax"), httpRequest.getParameter("ay"));
         LOG.debug("will query by BoundaryUpperLeft: " + retVal);
         return retVal;
     }
 
-    BoundaryBottomRight getBoundaryBottomRight(HttpServletRequest httpRequest) {
+    private BoundaryBottomRight getBoundaryBottomRight(HttpServletRequest httpRequest) {
         final BoundaryBottomRight retVal = new BoundaryBottomRight(httpRequest.getParameter("bx"), httpRequest.getParameter("by"));
         LOG.debug("will query by BoundaryBottomRight: " + retVal);
         return retVal;

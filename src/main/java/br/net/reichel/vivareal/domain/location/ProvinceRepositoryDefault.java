@@ -38,17 +38,16 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream("/provinces.json"));
         rootNode.fieldNames().forEachRemaining(nodeName -> {
-            final String name = nodeName;
             try {
-                final JsonNode upperLeftNode = rootNode.get(name).get("boundaries").get("upperLeft");
-                final JsonNode bottomRightNode = rootNode.get(name).get("boundaries").get("bottomRight");
+                final JsonNode upperLeftNode = rootNode.get(nodeName).get("boundaries").get("upperLeft");
+                final JsonNode bottomRightNode = rootNode.get(nodeName).get("boundaries").get("bottomRight");
                 final Coordinate upperLeft = mapper.treeToValue(upperLeftNode, Coordinate.class);
                 final Coordinate bottomRight = mapper.treeToValue(bottomRightNode, Coordinate.class);
-                final Province province = new Province(name, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight));
+                final Province province = new Province(nodeName, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight));
                 LOG.debug("Loading province: " + province);
                 db.add(province);
             } catch (Throwable e) {
-                LOG.error("error at province: " + name + " - " + e.getMessage());
+                LOG.error("error at province: " + nodeName + " - " + e.getMessage());
             }
         });
     }

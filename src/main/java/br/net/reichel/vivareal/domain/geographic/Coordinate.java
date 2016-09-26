@@ -11,10 +11,10 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class Coordinate {
 
-    public static final Integer LATITUDE_MAX = 1400;
-    public static final Integer LONGITUDE_MAX = 1100;
-    public static final Integer LATITUDE_MIN = 0;
-    public static final Integer LONGITUDE_MIN = 0;
+    private static final Integer LATITUDE_MAX = 1400;
+    private static final Integer LONGITUDE_MAX = 1100;
+    private static final Integer LATITUDE_MIN = 0;
+    private static final Integer LONGITUDE_MIN = 0;
 
     private Integer latitude;
     private Integer longitude;

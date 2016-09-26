@@ -1,5 +1,9 @@
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.beans" level="WARN"/>
@@ -8,7 +12,6 @@
     <logger name="com.infomatiq.jsi.rtree.RTree" level="WARN"/>
 
     <root level="INFO">
-        <!-- CONSOLE vem do xml do import -->
         <appender-ref ref="CONSOLE" />
     </root>
 

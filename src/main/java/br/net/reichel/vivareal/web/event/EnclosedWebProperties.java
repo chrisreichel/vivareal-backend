@@ -40,10 +40,6 @@ public class EnclosedWebProperties {
         this.properties = properties;
     }
 
-    public void addWebProperty() {
-
-    }
-
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
