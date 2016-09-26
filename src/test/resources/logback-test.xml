@@ -5,7 +5,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.infomatiq.jsi.rtree.RTree" level="DEBUG"/>
+    <logger name="com.infomatiq.jsi.rtree" level="DEBUG"/>
     <logger name="br.net.reichel.vivareal" level="DEBUG"/>
 
     <root level="INFO">
