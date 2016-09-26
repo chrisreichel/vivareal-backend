@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.domain.geographic;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -55,10 +56,12 @@ public class Coordinate {
         this.longitude = longitude;
     }
 
+    @JsonIgnore
     public Integer getY() {
         return longitude;
     }
 
+    @JsonIgnore
     public Integer getX() {
         return latitude;
     }
