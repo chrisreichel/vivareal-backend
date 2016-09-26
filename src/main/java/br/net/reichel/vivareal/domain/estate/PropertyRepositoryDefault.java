@@ -67,6 +67,16 @@ public class PropertyRepositoryDefault implements PropertyRepository {
         return property;
     }
 
+    /**
+     * A busca utiliza um R-Tree based Spatial Index". É basicamente uma árvore balenceada.
+     * Estima-se que o Big O é:
+     * * Busca: O(log n) - (eu imagino que deva haver uma pequena penalização em relação a b-tree)
+     * * Inserção: O(n) (pior caso)
+     *
+     * @param upperLeft
+     * @param bottomRight
+     * @return
+     */
     @Override
     public Set<Property> findByArea(BoundaryUpperLeft upperLeft, BoundaryBottomRight bottomRight) {
         final Set<Property> propertiesFound = new HashSet<>();
@@ -74,6 +84,11 @@ public class PropertyRepositoryDefault implements PropertyRepository {
         spatialIndex.contains(getRectangleFrom(upperLeft, bottomRight), queryProcedure);
         queryProcedure.getIds().stream().map(id -> propertiesFound.add(persistence.get(id))).collect(toSet());
         return propertiesFound;
+    }
+
+    @Override
+    public Property findById(Integer propertyId) {
+        return persistence.get(propertyId);
     }
 
     //------------------------------------------------------------------------------------------------------------------

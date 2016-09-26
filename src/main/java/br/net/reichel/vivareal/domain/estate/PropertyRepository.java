@@ -14,4 +14,5 @@ public interface PropertyRepository {
 
     Set<Property> findByArea(BoundaryUpperLeft upperLeft, BoundaryBottomRight bottomRight);
 
+    Property findById(Integer propertyId);
 }

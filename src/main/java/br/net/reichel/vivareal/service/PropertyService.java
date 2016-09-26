@@ -2,12 +2,13 @@ package br.net.reichel.vivareal.service;
 
 import br.net.reichel.vivareal.domain.estate.Property;
 import br.net.reichel.vivareal.domain.estate.PropertyRepository;
+import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
+import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.location.Province;
 import br.net.reichel.vivareal.domain.location.ProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -42,11 +43,22 @@ public class PropertyService {
         return true;
     }
 
-    public Property findById(Long propertyId) {
-        return null;
+    public Property findById(Integer propertyId) {
+        checkArgument(propertyId > 0, "propertyId invalid: %s", propertyId);
+        final Property property = propertyRepository.findById(propertyId);
+        if (property.getProvinces().isEmpty()) {
+            property.setProvinces(provinceRepository.findBy(property.getLocation()));
+        }
+        return property;
     }
 
-    public Set<Property> queryByCriteria() {
-        return Collections.emptySet();
+    public Set<Property> findByArea(BoundaryUpperLeft boundaryUpperLeft, BoundaryBottomRight boundaryBottomRight) {
+        final Set<Property> properties = propertyRepository.findByArea(boundaryUpperLeft, boundaryBottomRight);
+        properties.stream().forEach(property -> {
+            if (property.getProvinces().isEmpty()) {
+                property.setProvinces(provinceRepository.findBy(property.getLocation()));
+            }
+        });
+        return properties;
     }
 }
