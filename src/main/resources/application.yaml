@@ -1,0 +1,3 @@
+data:
+  propertyInputFile: /properties.json
+  provinceInputFile: /provinces.json

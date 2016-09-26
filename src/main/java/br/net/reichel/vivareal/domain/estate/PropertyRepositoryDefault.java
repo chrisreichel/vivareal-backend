@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.domain.estate;
 
+import br.net.reichel.vivareal.config.RepositorySettings;
 import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
 import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
@@ -14,6 +15,7 @@ import gnu.trove.TIntProcedure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -32,14 +34,18 @@ public class PropertyRepositoryDefault implements PropertyRepository {
     private final Map<Integer, Property> persistence = new HashMap<>();
     private final SpatialIndex spatialIndex = new RTree();
 
-    public PropertyRepositoryDefault() {
+    private RepositorySettings repositorySettings;
+
+    @Autowired
+    public PropertyRepositoryDefault(RepositorySettings repositorySettings) {
+        this.repositorySettings = repositorySettings;
         spatialIndex.init(null);
     }
 
     @PostConstruct
     public void loadData() throws Exception {
         final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream("/sample_properties.json"));
+        final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream(repositorySettings.getPropertyInputFile()));
         rootNode.get("properties").elements().forEachRemaining(propNode -> {
             PersistedProperty persisted = null;
             try {

@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.domain.location;
 
+import br.net.reichel.vivareal.config.RepositorySettings;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,9 @@ public class ProvinceRepositoryDefaultTest {
 
     @Before
     public void setUp() throws Exception {
-        provinceRepository = new ProvinceRepositoryDefault();
+        final RepositorySettings repositorySettings = new RepositorySettings();
+        repositorySettings.setProvinceInputFile("/sample_provinces.json");
+        provinceRepository = new ProvinceRepositoryDefault(repositorySettings);
         provinceRepository.loadData();
     }
 

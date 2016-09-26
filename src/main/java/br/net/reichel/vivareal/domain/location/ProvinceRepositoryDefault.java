@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.domain.location;
 
+import br.net.reichel.vivareal.config.RepositorySettings;
 import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
 import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +28,11 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
 
     private Set<Province> db = new HashSet<>();
 
-    public ProvinceRepositoryDefault() {
+    private RepositorySettings repositorySettings;
+
+    @Autowired
+    public ProvinceRepositoryDefault(RepositorySettings repositorySettings) {
+        this.repositorySettings = repositorySettings;
     }
 
     public ProvinceRepositoryDefault(Set<Province> mockedData) {
@@ -36,7 +42,7 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
     @PostConstruct
     public void loadData() throws Exception {
         final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream("/provinces.json"));
+        final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream(repositorySettings.getProvinceInputFile()));
         rootNode.fieldNames().forEachRemaining(nodeName -> {
             try {
                 final JsonNode upperLeftNode = rootNode.get(nodeName).get("boundaries").get("upperLeft");

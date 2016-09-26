@@ -1,8 +1,10 @@
 package br.net.reichel.vivareal.domain.estate;
 
+import br.net.reichel.vivareal.config.RepositorySettings;
 import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
 import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Set;
@@ -19,10 +21,18 @@ import static org.junit.Assert.assertTrue;
  */
 public class PropertyRepositoryDefaultTest {
 
+    private RepositorySettings repositorySettings;
+
+    @Before
+    public void setUp() {
+        repositorySettings = new RepositorySettings();
+        repositorySettings.setPropertyInputFile("/sample_properties.json");
+    }
+
     @Test
     public void shouldLoadData() throws Exception {
         //Given
-        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault(repositorySettings);
         //When
         repository.loadData();
         //Then
@@ -33,7 +43,7 @@ public class PropertyRepositoryDefaultTest {
     @Test
     public void shouldQueryAndFindOneProp() throws Exception {
         //Given
-        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault(repositorySettings);
         repository.create(buildProperty(1, new Coordinate(1, 1)));
         repository.create(buildProperty(2, new Coordinate(3, 3)));
         repository.create(buildProperty(3, new Coordinate(5, 5)));
@@ -54,7 +64,7 @@ public class PropertyRepositoryDefaultTest {
     @Test
     public void shouldQueryAndFindTwoProps() throws Exception {
         //Given
-        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault(repositorySettings);
         repository.create(buildProperty(1, new Coordinate(1, 1)));
         repository.create(buildProperty(2, new Coordinate(3, 3)));
         repository.create(buildProperty(3, new Coordinate(5, 5)));
@@ -73,7 +83,7 @@ public class PropertyRepositoryDefaultTest {
     @Test
     public void shouldQueryAndFindNothing() throws Exception {
         //Given
-        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault(repositorySettings);
         repository.create(buildProperty(1, new Coordinate(1, 1)));
         repository.create(buildProperty(2, new Coordinate(3, 3)));
         repository.create(buildProperty(3, new Coordinate(5, 5)));
@@ -90,7 +100,7 @@ public class PropertyRepositoryDefaultTest {
     @Test
     public void shouldQueryAndFindAll() throws Exception {
         //Given
-        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        final PropertyRepositoryDefault repository = new PropertyRepositoryDefault(repositorySettings);
         repository.create(buildProperty(1, new Coordinate(1, 1)));
         repository.create(buildProperty(2, new Coordinate(3, 3)));
         repository.create(buildProperty(3, new Coordinate(5, 5)));
