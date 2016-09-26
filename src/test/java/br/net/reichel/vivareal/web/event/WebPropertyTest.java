@@ -19,8 +19,8 @@ public class WebPropertyTest {
         //Given
         final WebProperty request = new WebProperty();
         request.setId(51);
-        request.setX("222");
-        request.setY("444");
+        request.setX(222);
+        request.setY(444);
         request.setTitle("Imóvel código 1, com 5 quartos e 4 banheiros");
         request.setPrice(1250000);
         request.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");

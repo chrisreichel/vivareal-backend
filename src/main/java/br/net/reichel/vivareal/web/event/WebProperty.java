@@ -2,20 +2,27 @@ package br.net.reichel.vivareal.web.event;
 
 import br.net.reichel.vivareal.domain.estate.Property;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.BeanUtils;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
 //@XmlRootElement
 @JsonIgnoreProperties({"location"})
+@JsonPropertyOrder({"id", "title", "price", "description", "x", "y", "beds", "baths", "squareMeters", "provinces"})
 public class WebProperty extends Property {
 
-    private String x;
-    private String y;
+    private Integer x;
+    private Integer y;
 
     public WebProperty() {
     }
@@ -23,25 +30,30 @@ public class WebProperty extends Property {
     public WebProperty(Property property) {
         BeanUtils.copyProperties(property, this);
         if (property != null && property.getLocation() != null) {
-            x = property.getLocation().getX() + "";
-            y = property.getLocation().getY() + "";
+            x = property.getLocation().getX();
+            y = property.getLocation().getY();
         }
     }
 
-    public String getX() {
+    public Integer getX() {
         return x;
     }
 
-    public void setX(String x) {
+    public void setX(Integer x) {
         this.x = x;
     }
 
-    public String getY() {
+    public Integer getY() {
         return y;
     }
 
-    public void setY(String y) {
+    public void setY(Integer y) {
         this.y = y;
+    }
+
+    @JsonGetter("provinces")
+    public List<String> getProvincesAsList() {
+        return getProvinces().stream().map(province -> province.getName()).collect(toList());
     }
 
     public Property toProperty() {

@@ -18,13 +18,23 @@ import java.util.Set;
  * Created by creichel on 9/25/16.
  */
 @RestController
-@RequestMapping(value = "/{properties}")
+@RequestMapping(value = "/properties")
 public class PropertyController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PropertyController.class);
 
     @Autowired
     private PropertyService propertyService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public EnclosedWebProperties search(HttpServletRequest httpReq) {
+        final Set<Property> found = propertyService.findByArea(getBoundaryUpperLeftFrom(httpReq), getBoundaryBottomRight(httpReq));
+        LOG.debug("Amount of properties found: " + found.size());
+        if (LOG.isDebugEnabled()) {
+            found.forEach(property -> LOG.trace("found: " + property));
+        }
+        return new EnclosedWebProperties(found);
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     public WebProperty create(@RequestBody WebProperty webProperty) {
@@ -40,16 +50,6 @@ public class PropertyController {
         final Property property = propertyService.findById(id);
         LOG.debug("found " + property);
         return new WebProperty(property);
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public EnclosedWebProperties search(HttpServletRequest httpReq) {
-        final Set<Property> found = propertyService.findByArea(getBoundaryUpperLeftFrom(httpReq), getBoundaryBottomRight(httpReq));
-        LOG.debug("Amount of properties found: " + found.size());
-        if (LOG.isDebugEnabled()) {
-            found.forEach(property -> LOG.debug("found: " + property));
-        }
-        return new EnclosedWebProperties(found);
     }
 
     //------------------------------------------------------------------------------------------------------------------

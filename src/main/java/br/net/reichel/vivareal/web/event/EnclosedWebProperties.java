@@ -2,6 +2,7 @@ package br.net.reichel.vivareal.web.event;
 
 import br.net.reichel.vivareal.domain.estate.Property;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Created by ChristianReichel on 9/26/2016.
  */
+@JsonPropertyOrder({"totalProperties", "properties"})
 public class EnclosedWebProperties {
 
     private Collection<WebProperty> properties = new ArrayList<>();

@@ -8,8 +8,10 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.beans" level="WARN"/>
     <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="DEBUG"/>
     <logger name="org.springframework.core.env" level="WARN"/>
     <logger name="com.infomatiq.jsi.rtree.RTree" level="WARN"/>
+    <logger name="br.net.reichel.vivareal.web" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
