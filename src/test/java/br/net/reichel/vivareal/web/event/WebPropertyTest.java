@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
-public class PropertyRequestTest {
+public class WebPropertyTest {
 
     @Test
     public void shouldTranslateToPropertyDomain() throws Exception {
         //Given
-        final PropertyRequest request = new PropertyRequest();
+        final WebProperty request = new WebProperty();
         request.setId(51);
         request.setX("222");
         request.setY("444");
@@ -39,4 +39,10 @@ public class PropertyRequestTest {
         assertTrue(property.getProvinces().isEmpty());
     }
 
+    @Test
+    public void shouldBuildAWebPropertyFromProperty() throws Exception {
+        //Given
+        //When
+        //Then
+    }
 }

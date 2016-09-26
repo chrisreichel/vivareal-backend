@@ -7,17 +7,26 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.BeanUtils;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
-@XmlRootElement
-@JsonIgnoreProperties({"location", "id", "provinces"})
-public class PropertyRequest extends Property {
+//@XmlRootElement
+@JsonIgnoreProperties({"location"})
+public class WebProperty extends Property {
 
     private String x;
     private String y;
+
+    public WebProperty() {
+    }
+
+    public WebProperty(Property property) {
+        BeanUtils.copyProperties(property, this);
+        if (property != null && property.getLocation() != null) {
+            x = property.getLocation().getX() + "";
+            y = property.getLocation().getY() + "";
+        }
+    }
 
     public String getX() {
         return x;
@@ -35,10 +44,10 @@ public class PropertyRequest extends Property {
         this.y = y;
     }
 
-    public Property toProperty() throws Exception {
+    public Property toProperty() {
         final Property property = new Property();
         BeanUtils.copyProperties(this, property, "location", "id", "provinces");
-        property.setLocation(new Coordinate(y, x)); //lat and long
+        property.setLocation(new Coordinate(y, x)); //lat and long - no json está invertido
         return property;
     }
 

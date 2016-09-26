@@ -14,6 +14,10 @@ public class BoundaryUpperLeft extends Coordinate {
         super(latitude, longitude);
     }
 
+    public BoundaryUpperLeft(String latitude, String longitude) {
+        super(latitude, longitude);
+    }
+
     @Override
     public String toString() {
         return "BoundaryUpperLeft{" +

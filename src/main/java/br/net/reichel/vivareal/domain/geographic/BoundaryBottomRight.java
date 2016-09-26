@@ -14,6 +14,10 @@ public class BoundaryBottomRight extends Coordinate {
         super(latitude, longitude);
     }
 
+    public BoundaryBottomRight(String latitude, String longitude) {
+        super(latitude, longitude);
+    }
+
     @Override
     public String toString() {
         return "BoundaryBottomRight{" +
