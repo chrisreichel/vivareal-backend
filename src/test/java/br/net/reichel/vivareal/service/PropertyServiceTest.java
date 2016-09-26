@@ -102,7 +102,7 @@ public class PropertyServiceTest {
 
     Property buildProperty(Integer id) {
         final Property p = new Property();
-        p.setId(Long.parseLong("" + id));
+        p.setId(id);
         p.setLocation(new Coordinate(1, 2));
         p.setSquareMeters(100);
         p.setBaths(2);

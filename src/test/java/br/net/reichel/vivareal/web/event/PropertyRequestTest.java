@@ -18,7 +18,7 @@ public class PropertyRequestTest {
     public void shouldTranslateToPropertyDomain() throws Exception {
         //Given
         final PropertyRequest request = new PropertyRequest();
-        request.setId(51L);
+        request.setId(51);
         request.setX("222");
         request.setY("444");
         request.setTitle("Imóvel código 1, com 5 quartos e 4 banheiros");

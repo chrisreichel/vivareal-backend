@@ -32,9 +32,12 @@ public class PropertyRepositoryDefault implements PropertyRepository {
     private final Map<Integer, Property> persistence = new HashMap<>();
     private final SpatialIndex spatialIndex = new RTree();
 
+    public PropertyRepositoryDefault() {
+        spatialIndex.init(null);
+    }
+
     @PostConstruct
     public void loadData() throws Exception {
-        spatialIndex.init(null);
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode rootNode = mapper.readTree(this.getClass().getResourceAsStream("/sample_properties.json"));
         rootNode.get("properties").elements().forEachRemaining(propNode -> {
@@ -96,14 +99,8 @@ public class PropertyRepositoryDefault implements PropertyRepository {
             ids.add(id);
             return true;
         }
-
-        ;
-
         private Collection<Integer> getIds() {
             return ids;
         }
     }
-
-    ;
-
 }

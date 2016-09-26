@@ -14,7 +14,7 @@ public class PersistedPropertyTest {
     public void shouldGenerateAProperty() throws Exception {
         //Given
         final PersistedProperty persistedProp = new PersistedProperty();
-        persistedProp.setId(69L);
+        persistedProp.setId(69);
         persistedProp.setLatitude(222);
         persistedProp.setLongitude(444);
         persistedProp.setTitle("Imóvel código 1, com 5 quartos e 4 banheiros");

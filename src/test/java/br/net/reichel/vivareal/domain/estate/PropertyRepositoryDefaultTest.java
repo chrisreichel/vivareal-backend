@@ -1,13 +1,11 @@
 package br.net.reichel.vivareal.domain.estate;
 
-import com.infomatiq.jsi.Rectangle;
-import com.infomatiq.jsi.SpatialIndex;
-import com.infomatiq.jsi.rtree.RTree;
-import gnu.trove.TIntProcedure;
+import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
+import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
+import br.net.reichel.vivareal.domain.geographic.Coordinate;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -29,58 +27,37 @@ public class PropertyRepositoryDefaultTest {
     }
 
     @Test
-    public void shouldQueryWithJSI() throws Exception {
+    public void shouldQueryAndFindOneProp() throws Exception {
         //Given
         final PropertyRepositoryDefault repository = new PropertyRepositoryDefault();
+        repository.create(buildProperty(1, new Coordinate(1, 1)));
+        repository.create(buildProperty(2, new Coordinate(3, 3)));
+        repository.create(buildProperty(3, new Coordinate(5, 5)));
+        repository.create(buildProperty(4, new Coordinate(7, 7)));
+        repository.create(buildProperty(5, new Coordinate(9, 9)));
+        final BoundaryUpperLeft boundaryUpperLeft = new BoundaryUpperLeft(6, 8);
+        final BoundaryBottomRight boundaryBottomRight = new BoundaryBottomRight(8, 6);
         //When
-        //repository.loadData();
+        final Set<Property> foundProperties = repository.findByArea(boundaryUpperLeft, boundaryBottomRight);
         //Then
+        assertTrue(1 == foundProperties.size());
+        final Property found = foundProperties.iterator().next();
+        assertTrue(4 == found.getId());
+        assertTrue(7 == found.getLocation().getLatitude());
+        assertTrue(7 == found.getLocation().getLongitude());
+    }
 
-        SpatialIndex si = new RTree();
-        si.init(null);
-
-        Rectangle[] rects = new Rectangle[]{
-                new Rectangle(0, 0, 0, 0),
-                new Rectangle(0, 1, 0, 1),
-                new Rectangle(1, 0, 1, 0),
-                new Rectangle(1, 1, 1, 1),
-                new Rectangle(2, 2, 2, 2),
-                new Rectangle(4, 4, 4, 4),
-        };
-
-        for (int i = 0; i < rects.length; i++) {
-            si.add(rects[i], i + 1000);
-        }
-
-        class SaveToListProcedure implements TIntProcedure {
-            private List<Integer> ids = new ArrayList<>();
-
-            public boolean execute(int id) {
-                ids.add(id);
-                return true;
-            }
-
-            ;
-
-            private List<Integer> getIds() {
-                return ids;
-            }
-        }
-        ;
-
-        SaveToListProcedure myProc = new SaveToListProcedure();
-        si.contains(new Rectangle(3, 3, 5, 5), myProc);
-
-        List<Integer> ids = myProc.getIds();
-
-        for (Integer id : ids) {
-            System.out.println("id: " + id + " - " + rects[id].toString() + " was contained");
-        }
-
-        // Actually that was a really long winded (and inefficient) way of
-        // printing out the rectangles. Would be better to use an anonymous
-        // class to just do the printing inside the execute method. That is
-
+    Property buildProperty(Integer id, Coordinate location) {
+        final Property property = new Property();
+        property.setId(id);
+        property.setBaths(2);
+        property.setBeds(2);
+        property.setDescription("Teste JUNIT");
+        property.setTitle("JUNIT");
+        property.setSquareMeters(100);
+        property.setPrice(123456);
+        property.setLocation(location);
+        return property;
     }
 
 }
