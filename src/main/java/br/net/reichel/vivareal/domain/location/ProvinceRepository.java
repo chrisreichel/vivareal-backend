@@ -1,5 +1,7 @@
 package br.net.reichel.vivareal.domain.location;
 
+import br.net.reichel.vivareal.domain.geographic.Coordinate;
+
 import java.util.Set;
 
 /**
@@ -8,5 +10,7 @@ import java.util.Set;
 public interface ProvinceRepository {
 
     Set<Province> getAll();
+
+    Set<Province> findBy(Coordinate coordinate);
 
 }

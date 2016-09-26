@@ -4,6 +4,8 @@ import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
 import br.net.reichel.vivareal.domain.geographic.BoundaryUpperLeft;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
@@ -23,8 +25,21 @@ public class Province {
         boundaryBottomRight = bottomRight;
 
         // Dado que as "províncias" são retangulares
-        boundaryUpperRight = new Coordinate(boundaryUpperLeft.getLatitude(), boundaryBottomRight.getLongitude());
-        boundaryBottomLeft = new Coordinate(boundaryBottomRight.getLatitude(), boundaryUpperLeft.getLongitude());
+        boundaryUpperRight = new Coordinate(boundaryBottomRight.getLongitude(), boundaryUpperLeft.getLatitude());
+        boundaryBottomLeft = new Coordinate(boundaryUpperLeft.getLongitude(), boundaryBottomRight.getLatitude());
+    }
+
+    public boolean contains(Coordinate location) {
+        checkArgument(location != null, "invalid coordinate " + location);
+        return (isBetweenBoundLatitudes(location.getLatitude()) && isBetweenBoundLongitudes(location.getLongitude()));
+    }
+
+    boolean isBetweenBoundLongitudes(Integer longitude) {
+        return (boundaryUpperLeft.getLongitude() <= longitude && longitude <= boundaryUpperRight.getLongitude());
+    }
+
+    boolean isBetweenBoundLatitudes(Integer latitude) {
+        return (boundaryBottomLeft.getLatitude() <= latitude && latitude <= boundaryUpperLeft.getLatitude());
     }
 
     public String getName() {

@@ -38,7 +38,7 @@ public class PropertyRequest extends Property {
     public Property toProperty() throws Exception {
         final Property property = new Property();
         BeanUtils.copyProperties(this, property, "location", "id", "provinces");
-        property.setLocation(new Coordinate(x, y));
+        property.setLocation(new Coordinate(y, x)); //lat and long
         return property;
     }
 

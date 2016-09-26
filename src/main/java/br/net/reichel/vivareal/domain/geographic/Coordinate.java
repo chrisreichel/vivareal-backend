@@ -23,14 +23,14 @@ public class Coordinate {
     }
 
     public Coordinate(String x, String y) {
-        this(Integer.valueOf(y), Integer.valueOf(x));
+        this(Integer.valueOf(x), Integer.valueOf(y));
     }
 
     public Coordinate(Coordinate reference) {
-        this(reference.getLatitude(), reference.getLongitude());
+        this(reference.getLongitude(), reference.getLatitude());
     }
 
-    public Coordinate(Integer latitude, Integer longitude) {
+    public Coordinate(Integer longitude, Integer latitude) {
         setLatitude(latitude);
         setLongitude(longitude);
     }

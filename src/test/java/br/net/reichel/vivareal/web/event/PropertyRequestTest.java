@@ -28,12 +28,12 @@ public class PropertyRequestTest {
         request.setBaths(3);
         request.setSquareMeters(210);
         request.addProvince(new Province("Taubaté", new BoundaryUpperLeft(1, 2), new BoundaryBottomRight(3, 4)));
-        request.setLocation(new Coordinate(123, 456));
+        request.setLocation(new Coordinate(456, 123));
         //When
         final Property property = request.toProperty();
         //Then
-        assertTrue(222 == property.getLocation().getLongitude());
-        assertTrue(444 == property.getLocation().getLatitude());
+        assertTrue(444 == property.getLocation().getLongitude());
+        assertTrue(222 == property.getLocation().getLatitude());
         assertEquals("Imóvel código 1, com 5 quartos e 4 banheiros", request.getTitle());
         assertNull(property.getId());
         assertTrue(property.getProvinces().isEmpty());

@@ -10,8 +10,8 @@ public class BoundaryBottomRight extends Coordinate {
         super(coordinate);
     }
 
-    public BoundaryBottomRight(Integer latitude, Integer longitude) {
-        super(latitude, longitude);
+    public BoundaryBottomRight(Integer longitude, Integer latitude) {
+        super(longitude, latitude);
     }
 
     @Override

@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toSet;
+
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
@@ -24,7 +26,7 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProvinceRepositoryDefault.class);
 
-    private Set<Province> persistence = new HashSet<>();
+    private Set<Province> db = new HashSet<>();
 
     @PostConstruct
     public void loadData() throws Exception {
@@ -39,7 +41,7 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
                 final JsonNode bottomRightNode = rootNode.get(name).get("boundaries").get("bottomRight");
                 final Coordinate upperLeft = mapper.treeToValue(upperLeftNode, Coordinate.class);
                 final Coordinate bottomRight = mapper.treeToValue(bottomRightNode, Coordinate.class);
-                persistence.add(new Province(name, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight)));
+                db.add(new Province(name, new BoundaryUpperLeft(upperLeft), new BoundaryBottomRight(bottomRight)));
             } catch (Throwable e) {
                 LOG.error("error at province: " + name + " - " + e.getMessage());
             }
@@ -48,7 +50,12 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
 
     @Override
     public Set<Province> getAll() {
-        return Collections.unmodifiableSet(persistence);
+        return Collections.unmodifiableSet(db);
+    }
+
+    @Override
+    public Set<Province> findBy(final Coordinate coordinate) {
+        return db.stream().filter(province -> province.contains(coordinate)).collect(toSet());
     }
 
 

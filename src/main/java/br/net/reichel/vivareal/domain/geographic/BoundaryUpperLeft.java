@@ -10,8 +10,8 @@ public class BoundaryUpperLeft extends Coordinate {
         super(coordinate);
     }
 
-    public BoundaryUpperLeft(Integer latitude, Integer longitude) {
-        super(latitude, longitude);
+    public BoundaryUpperLeft(Integer longitude, Integer latitude) {
+        super(longitude, latitude);
     }
 
     @Override
