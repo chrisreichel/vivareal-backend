@@ -7,12 +7,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * Created by Christian Reichel on 9/25/2016.
  *
- * (x, y) -> (longitude, latitude)
+ * (x, y) -> (latitude, longitude)
  */
 public class Coordinate {
 
-    public static final Integer LATITUDE_MAX = 1100;
-    public static final Integer LONGITUDE_MAX = 1400;
+    public static final Integer LATITUDE_MAX = 1400;
+    public static final Integer LONGITUDE_MAX = 1100;
     public static final Integer LATITUDE_MIN = 0;
     public static final Integer LONGITUDE_MIN = 0;
 
@@ -27,10 +27,10 @@ public class Coordinate {
     }
 
     public Coordinate(Coordinate reference) {
-        this(reference.getLongitude(), reference.getLatitude());
+        this(reference.getLatitude(), reference.getLongitude());
     }
 
-    public Coordinate(Integer longitude, Integer latitude) {
+    public Coordinate(Integer latitude, Integer longitude) {
         setLatitude(latitude);
         setLongitude(longitude);
     }
@@ -39,7 +39,7 @@ public class Coordinate {
         return latitude;
     }
 
-    @JsonSetter("y")
+    @JsonSetter("x")
     public void setLatitude(Integer latitude) {
         checkArgument(latitude != null && latitude >= LATITUDE_MIN && latitude <= LATITUDE_MAX, "invalid latitude %s", latitude);
         this.latitude = latitude;
@@ -49,25 +49,25 @@ public class Coordinate {
         return longitude;
     }
 
-    @JsonSetter("x")
+    @JsonSetter("y")
     public void setLongitude(Integer longitude) {
         checkArgument(longitude != null && longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX, "invalid longitude %s", longitude);
         this.longitude = longitude;
     }
 
     public Integer getY() {
-        return latitude;
+        return longitude;
     }
 
     public Integer getX() {
-        return longitude;
+        return latitude;
     }
 
     @Override
     public String toString() {
         return "Coordinate{" +
-                "latitude(y)=" + latitude +
-                ", longitude(x)=" + longitude +
+                "latitude(x)=" + latitude +
+                ", longitude(y)=" + longitude +
                 '}';
     }
 }

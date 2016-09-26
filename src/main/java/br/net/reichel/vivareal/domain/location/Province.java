@@ -25,9 +25,21 @@ public class Province {
         boundaryBottomRight = bottomRight;
 
         // Dado que as "províncias" são retangulares
-        boundaryUpperRight = new Coordinate(boundaryBottomRight.getLongitude(), boundaryUpperLeft.getLatitude());
-        boundaryBottomLeft = new Coordinate(boundaryUpperLeft.getLongitude(), boundaryBottomRight.getLatitude());
+        boundaryUpperRight = new Coordinate(boundaryBottomRight.getLatitude(), boundaryUpperLeft.getLongitude());
+        boundaryBottomLeft = new Coordinate(boundaryUpperLeft.getLatitude(), boundaryBottomRight.getLongitude());
+        debug();
     }
+
+    private void debug() {
+        System.out.printf("(%s,%s) ---------------- (%s,%s)\n",
+                boundaryUpperLeft.getLatitude(), boundaryUpperLeft.getLongitude(), boundaryUpperRight.getLatitude(), boundaryUpperRight.getLongitude());
+        for (int i = 0; i < 3; i++) {
+            System.out.println("|                           |");
+        }
+        System.out.printf("(%s,%s) ---------------- (%s,%s)\n",
+                boundaryBottomLeft.getLatitude(), boundaryBottomLeft.getLongitude(), boundaryBottomRight.getLatitude(), boundaryBottomRight.getLongitude());
+    }
+
 
     public boolean contains(Coordinate location) {
         checkArgument(location != null, "invalid coordinate " + location);
@@ -35,11 +47,11 @@ public class Province {
     }
 
     boolean isBetweenBoundLongitudes(Integer longitude) {
-        return (boundaryUpperLeft.getLongitude() <= longitude && longitude <= boundaryUpperRight.getLongitude());
+        return (boundaryBottomLeft.getLongitude() <= longitude && longitude <= boundaryUpperLeft.getLongitude());
     }
 
     boolean isBetweenBoundLatitudes(Integer latitude) {
-        return (boundaryBottomLeft.getLatitude() <= latitude && latitude <= boundaryUpperLeft.getLatitude());
+        return (boundaryBottomLeft.getLatitude() <= latitude && latitude <= boundaryBottomRight.getLatitude());
     }
 
     public String getName() {

@@ -38,7 +38,7 @@ public class ProvinceRepositoryDefault implements ProvinceRepository {
     @PostConstruct
     public void loadData() throws Exception {
         //TODO: Parametrizar
-        final byte[] jsonFile = Files.readAllBytes(Paths.get("C:\\Users\\HE-SERIES\\Documents\\vivareal-backend\\src\\main\\resources\\provinces.json"));
+        final byte[] jsonFile = Files.readAllBytes(Paths.get("/Users/creichel/Documents/Development/VivaReal/vivareal-backend/src/main/resources/provinces.json"));
         final ObjectMapper mapper = new ObjectMapper();
         final JsonNode rootNode = mapper.readTree(jsonFile);
         rootNode.fieldNames().forEachRemaining(nodeName -> {

@@ -32,8 +32,8 @@ public class PropertyRequestTest {
         //When
         final Property property = request.toProperty();
         //Then
-        assertTrue(444 == property.getLocation().getLongitude());
-        assertTrue(222 == property.getLocation().getLatitude());
+        assertTrue(222 == property.getLocation().getLongitude());
+        assertTrue(444 == property.getLocation().getLatitude());
         assertEquals("Imóvel código 1, com 5 quartos e 4 banheiros", request.getTitle());
         assertNull(property.getId());
         assertTrue(property.getProvinces().isEmpty());

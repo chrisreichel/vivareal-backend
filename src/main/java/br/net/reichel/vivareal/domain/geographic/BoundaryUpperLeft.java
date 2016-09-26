@@ -10,15 +10,15 @@ public class BoundaryUpperLeft extends Coordinate {
         super(coordinate);
     }
 
-    public BoundaryUpperLeft(Integer longitude, Integer latitude) {
-        super(longitude, latitude);
+    public BoundaryUpperLeft(Integer latitude, Integer longitude) {
+        super(latitude, longitude);
     }
 
     @Override
     public String toString() {
         return "BoundaryUpperLeft{" +
-                "latitude(y)=" + super.getLatitude() +
-                ", longitude(x)=" + super.getLongitude() +
+                "latitude(x)=" + super.getLatitude() +
+                ", longitude(y)=" + super.getLongitude() +
                 '}';
     }
 }

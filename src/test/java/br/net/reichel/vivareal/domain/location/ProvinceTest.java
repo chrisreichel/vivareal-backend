@@ -20,7 +20,7 @@ public class ProvinceTest {
 
     @Before
     public void setUp() {
-        //(y, x) -> (latitude, longitude)
+        //(x, y) -> (latitude, longitude)
         final BoundaryUpperLeft upperLeft = new BoundaryUpperLeft(0, 500);
         final BoundaryBottomRight bottomRight = new BoundaryBottomRight(600, 0);
         referenceProvince = new Province("JUNIT", upperLeft, bottomRight);
@@ -38,8 +38,8 @@ public class ProvinceTest {
     public void shouldGetBoundaryUpperRight() throws Exception {
         //Given and When @ setUp
         //Then
-        assertThat(600, is(equalTo(referenceProvince.getBoundaryUpperRight().getLongitude())));
-        assertThat(500, is(equalTo(referenceProvince.getBoundaryUpperRight().getLatitude())));
+        assertThat(500, is(equalTo(referenceProvince.getBoundaryUpperRight().getLongitude())));
+        assertThat(600, is(equalTo(referenceProvince.getBoundaryUpperRight().getLatitude())));
     }
 
     @Test
