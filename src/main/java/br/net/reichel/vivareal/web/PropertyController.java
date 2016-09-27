@@ -47,7 +47,7 @@ public class PropertyController {
         LOG.debug("Will create " + webProperty);
         final Property created = propertyService.create(webProperty.toProperty());
         LOG.debug("created " + created);
-        if (created != null) {
+        if (created == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(new WebProperty(created), HttpStatus.OK);
