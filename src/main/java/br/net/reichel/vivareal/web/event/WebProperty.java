@@ -17,7 +17,6 @@ import static java.util.stream.Collectors.toList;
 /**
  * Created by Christian Reichel on 9/25/2016.
  */
-//@XmlRootElement
 @JsonIgnoreProperties({"location"})
 @JsonPropertyOrder({"id", "title", "price", "description", "x", "y", "beds", "baths", "squareMeters", "provinces"})
 public class WebProperty extends Property {

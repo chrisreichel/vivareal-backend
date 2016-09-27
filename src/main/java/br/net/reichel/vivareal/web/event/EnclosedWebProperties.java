@@ -13,6 +13,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * Encapsula o modelo de domínio da Property[]
  * Created by ChristianReichel on 9/26/2016.
  */
 @JsonPropertyOrder({"totalProperties", "properties"})

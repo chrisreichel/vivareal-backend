@@ -57,6 +57,14 @@ public class PropertyService {
         return property;
     }
 
+    /**
+     * Dada uma área compreendida entre os limites superior esquerdo e inferior direito, procura as Propriedades na
+     * região.
+     *
+     * @param boundaryUpperLeft
+     * @param boundaryBottomRight
+     * @return
+     */
     public Set<Property> findByArea(BoundaryUpperLeft boundaryUpperLeft, BoundaryBottomRight boundaryBottomRight) {
         final Set<Property> properties = propertyRepository.findByArea(boundaryUpperLeft, boundaryBottomRight);
         properties.forEach(property -> {

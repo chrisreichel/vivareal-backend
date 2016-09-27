@@ -42,6 +42,11 @@ public class PropertyRepositoryDefault implements PropertyRepository {
         spatialIndex.init(null);
     }
 
+    /**
+     * Faz o carregamento do json definido em arquivo de configuração.
+     *
+     * @throws Exception
+     */
     @PostConstruct
     public void loadData() throws Exception {
         final ObjectMapper mapper = new ObjectMapper();
