@@ -23,6 +23,7 @@ class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     ResponseEntity<?> handleControllerException(HttpServletRequest request, Throwable ex) {
         HttpStatus status = getStatus(request);
+        LOG.error(ex.getMessage(), ex);
         return new ResponseEntity<>(ex.getMessage(), status);
     }
 

@@ -2,6 +2,7 @@ package br.net.reichel.vivareal.web.event;
 
 import br.net.reichel.vivareal.domain.estate.Property;
 import br.net.reichel.vivareal.domain.geographic.Coordinate;
+import br.net.reichel.vivareal.domain.location.Province;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -53,7 +54,7 @@ public class WebProperty extends Property {
 
     @JsonGetter("provinces")
     public List<String> getProvincesAsList() {
-        return getProvinces().stream().map(province -> province.getName()).collect(toList());
+        return getProvinces().stream().map(Province::getName).collect(toList());
     }
 
     public Property toProperty() {

@@ -59,7 +59,7 @@ public class PropertyService {
 
     public Set<Property> findByArea(BoundaryUpperLeft boundaryUpperLeft, BoundaryBottomRight boundaryBottomRight) {
         final Set<Property> properties = propertyRepository.findByArea(boundaryUpperLeft, boundaryBottomRight);
-        properties.stream().forEach(property -> {
+        properties.forEach(property -> {
             if (property.getProvinces().isEmpty()) {
                 property.setProvinces(provinceRepository.findBy(property.getLocation()));
             }
