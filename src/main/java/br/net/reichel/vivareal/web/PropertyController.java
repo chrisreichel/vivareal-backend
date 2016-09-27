@@ -39,7 +39,7 @@ public class PropertyController {
         if (found.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new EnclosedWebProperties(found), HttpStatus.CREATED);
+        return new ResponseEntity<>(new EnclosedWebProperties(found), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public class PropertyController {
         if (created == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new WebProperty(created), HttpStatus.OK);
+        return new ResponseEntity<>(new WebProperty(created), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
