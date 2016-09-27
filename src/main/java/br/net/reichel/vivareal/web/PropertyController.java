@@ -64,7 +64,7 @@ public class PropertyController {
         return new ResponseEntity<>(new WebProperty(property), HttpStatus.OK);
     }
 
-    @ExceptionHandler({Exception.class, IllegalArgumentException.class})
+    @ExceptionHandler({Exception.class, IllegalArgumentException.class, NumberFormatException.class})
     public ModelAndView handleError(HttpServletRequest req, Exception ex) {
         LOG.error("Request: " + req.getRequestURL() + " raised " + ex);
         final ModelAndView mav = new ModelAndView();
