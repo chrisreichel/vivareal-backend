@@ -59,7 +59,7 @@ public class WebProperty extends Property {
     public Property toProperty() {
         final Property property = new Property();
         BeanUtils.copyProperties(this, property, "location", "id", "provinces");
-        property.setLocation(new Coordinate(y, x)); //lat and long - no json está invertido
+        property.setLocation(new Coordinate(x, y));
         return property;
     }
 

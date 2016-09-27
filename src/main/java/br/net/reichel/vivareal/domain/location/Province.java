@@ -19,6 +19,10 @@ public class Province {
     private Coordinate boundaryBottomLeft;
     private Coordinate boundaryUpperRight;
 
+    public Province(String name) {
+        this.name = name;
+    }
+
     public Province(String name, BoundaryUpperLeft upperLeft, BoundaryBottomRight bottomRight) {
         this.name = name;
         boundaryUpperLeft = upperLeft;
