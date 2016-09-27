@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
@@ -64,14 +63,16 @@ public class PropertyController {
         return new ResponseEntity<>(new WebProperty(property), HttpStatus.OK);
     }
 
-    @ExceptionHandler({Exception.class, IllegalArgumentException.class, NumberFormatException.class})
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
-        LOG.error("Request: " + req.getRequestURL() + " raised " + ex);
-        final ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", ex);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName("error");
-        return mav;
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Bad request, probably invalid data")
+    public void handleIllegalArgumentException(Exception ex) {
+        LOG.error("handleException handler called: " + ex.getMessage());
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE, reason = "Invalid number format")
+    public void handleNumberFormatException(Exception ex) {
+        LOG.error("handleNumberFormatException handler called: " + ex.getMessage());
     }
 
     //------------------------------------------------------------------------------------------------------------------
