@@ -39,7 +39,7 @@ public class PropertyController {
         if (found.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new EnclosedWebProperties(found), HttpStatus.OK);
+        return new ResponseEntity<>(new EnclosedWebProperties(found), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST)
