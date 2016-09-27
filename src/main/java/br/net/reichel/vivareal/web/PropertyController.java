@@ -9,7 +9,10 @@ import br.net.reichel.vivareal.web.event.WebProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
@@ -27,29 +30,48 @@ public class PropertyController {
     private PropertyService propertyService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public EnclosedWebProperties search(HttpServletRequest httpReq) {
+    public ResponseEntity<EnclosedWebProperties> search(HttpServletRequest httpReq) {
         final Set<Property> found = propertyService.findByArea(getBoundaryUpperLeftFrom(httpReq), getBoundaryBottomRight(httpReq));
         LOG.debug("Amount of properties found: " + found.size());
         if (LOG.isDebugEnabled()) {
             found.forEach(property -> LOG.trace("found: " + property));
         }
-        return new EnclosedWebProperties(found);
+        if (found.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(new EnclosedWebProperties(found), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public WebProperty create(@RequestBody WebProperty webProperty) {
+    public ResponseEntity<WebProperty> create(@RequestBody WebProperty webProperty) {
         LOG.debug("Will create " + webProperty);
         final Property created = propertyService.create(webProperty.toProperty());
         LOG.debug("created " + created);
-        return new WebProperty(created);
+        if (created != null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new WebProperty(created), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public WebProperty getProperty(@PathVariable Integer id) {
+    public ResponseEntity<WebProperty> getProperty(@PathVariable Integer id) {
         LOG.debug("Looking for WebProperty " + id);
         final Property property = propertyService.findById(id);
         LOG.debug("found " + property);
-        return new WebProperty(property);
+        if (property == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(new WebProperty(property), HttpStatus.OK);
+    }
+
+    @ExceptionHandler({Exception.class, IllegalArgumentException.class})
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        LOG.error("Request: " + req.getRequestURL() + " raised " + ex);
+        final ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error");
+        return mav;
     }
 
     //------------------------------------------------------------------------------------------------------------------
