@@ -49,7 +49,6 @@ public class PropertyService {
     }
 
     public Property findById(Integer propertyId) {
-        checkArgument(propertyId > 0, "propertyId invalid: %s", propertyId);
         final Property property = propertyRepository.findById(propertyId);
         if (property != null && property.getProvinces().isEmpty()) {
             property.setProvinces(provinceRepository.findBy(property.getLocation()));
