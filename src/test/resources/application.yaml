@@ -1,3 +1,11 @@
 data:
   propertyInputFile: /sample_properties.json
   provinceInputFile: /sample_provinces.json
+
+validation:
+  maxBeds: 5
+  minBeds: 1
+  maxBaths: 5
+  minBaths: 1
+  maxArea: 240
+  minArea: 20

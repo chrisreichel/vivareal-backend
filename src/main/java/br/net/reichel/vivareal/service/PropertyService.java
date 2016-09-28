@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.service;
 
+import br.net.reichel.vivareal.config.ValidationSettings;
 import br.net.reichel.vivareal.domain.estate.Property;
 import br.net.reichel.vivareal.domain.estate.PropertyRepository;
 import br.net.reichel.vivareal.domain.geographic.BoundaryBottomRight;
@@ -23,14 +24,16 @@ public class PropertyService {
 
     private static final Logger LOG = LoggerFactory.getLogger(PropertyService.class);
 
-    private PropertyRepository propertyRepository;
-    private ProvinceRepository provinceRepository;
+    private final PropertyRepository propertyRepository;
+    private final ProvinceRepository provinceRepository;
+    private final ValidationSettings rules;
 
     @Autowired
-    public PropertyService(PropertyRepository propertyRepository, ProvinceRepository provinceRepository) {
-        LOG.debug("Using repositories: " + propertyRepository + " and " + provinceRepository);
-        this.propertyRepository = propertyRepository;
-        this.provinceRepository = provinceRepository;
+    public PropertyService(PropertyRepository propertyRepo, ProvinceRepository provinceRepo, ValidationSettings rules) {
+        LOG.debug("Using repositories: " + propertyRepo + " and " + provinceRepo);
+        this.propertyRepository = propertyRepo;
+        this.provinceRepository = provinceRepo;
+        this.rules = rules;
     }
 
     public Property create(Property property) {
@@ -42,9 +45,9 @@ public class PropertyService {
 
     private boolean isValidInfo(Property p) {
         checkArgument(p != null, "property is invalid");
-        checkArgument(p.getBaths() >= 1 && p.getBaths() <= 4, "invalid no. of baths (%s)", p.getBaths());
-        checkArgument(p.getBeds() >= 1 && p.getBeds() <= 5, "invalid no. of beds (%s)", p.getBeds());
-        checkArgument(p.getSquareMeters() >= 20 && p.getSquareMeters() <= 240, "invalid sq. meters (%s)", p.getBeds());
+        checkArgument(p.getBaths() >= rules.getMinBaths() && p.getBaths() <= rules.getMaxBaths(), "invalid no. of baths (%s)", p.getBaths());
+        checkArgument(p.getBeds() >= rules.getMinBeds() && p.getBeds() <= rules.getMaxBeds(), "invalid no. of beds (%s)", p.getBeds());
+        checkArgument(p.getSquareMeters() >= rules.getMinArea() && p.getSquareMeters() <= rules.getMaxArea(), "invalid sq. meters (%s)", p.getBeds());
         return true;
     }
 

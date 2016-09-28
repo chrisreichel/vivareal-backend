@@ -1,5 +1,6 @@
 package br.net.reichel.vivareal.service;
 
+import br.net.reichel.vivareal.config.ValidationSettings;
 import br.net.reichel.vivareal.domain.estate.Property;
 import br.net.reichel.vivareal.domain.estate.PropertyRepository;
 import br.net.reichel.vivareal.domain.estate.PropertyRepositoryDefault;
@@ -28,7 +29,6 @@ public class PropertyServiceTest {
     private ProvinceRepositoryDefault provinceRepository;
     private PropertyRepository propertyRepository;
 
-
     @Before
     public void setUp() throws Exception {
         final Set<Province> mockedData = new HashSet<>();
@@ -38,7 +38,15 @@ public class PropertyServiceTest {
         provinceRepository = new ProvinceRepositoryDefault(mockedData);
         propertyRepository = mock(PropertyRepositoryDefault.class);
 
-        service = new PropertyService(propertyRepository, provinceRepository);
+        final ValidationSettings rules = new ValidationSettings();
+        rules.setMaxArea(240);
+        rules.setMaxBaths(4);
+        rules.setMaxBeds(5);
+        rules.setMinArea(20);
+        rules.setMinBaths(1);
+        rules.setMinBeds(1);
+
+        service = new PropertyService(propertyRepository, provinceRepository, rules);
     }
 
     @Test
