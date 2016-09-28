@@ -32,7 +32,7 @@ public class PropertyController {
     public ResponseEntity<EnclosedWebProperties> search(HttpServletRequest httpReq) {
         final Set<Property> found = propertyService.findByArea(getBoundaryUpperLeftFrom(httpReq), getBoundaryBottomRight(httpReq));
         LOG.debug("Amount of properties found: " + found.size());
-        if (LOG.isDebugEnabled()) {
+        if (LOG.isTraceEnabled()) {
             found.forEach(property -> LOG.trace("found: " + property));
         }
         if (found.isEmpty()) {
